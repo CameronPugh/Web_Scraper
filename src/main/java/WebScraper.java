@@ -17,7 +17,7 @@ public class WebScraper {
 
     ArrayList<Result> results = new ArrayList<>();
 
-    public void getPageInfo() {
+    public ArrayList<Result> getPageInfo(String url) {
 
         WebClient webClient = new WebClient(BrowserVersion.CHROME);
         FileWriter recipesFile;
@@ -25,7 +25,7 @@ public class WebScraper {
         try {
             recipesFile = new FileWriter("recipes.csv", true);
 
-            HtmlPage page = webClient.getPage("http://slashdot.org");
+            HtmlPage page = webClient.getPage(url);
             webClient.waitForBackgroundJavaScript(3000);
             webClient.getOptions().setJavaScriptEnabled(true);
 
@@ -74,14 +74,17 @@ public class WebScraper {
             }
             recipesFile.close();
 
+            return finalResults;
+
 
         } catch (IOException e) {
             System.out.println("An error occurred: " + e);
         }
+        return null;
 
     }
     public static void main(String[] args) {
         WebScraper ws =new WebScraper();
-        ws.getPageInfo();
+        ArrayList<Result> r =  ws.getPageInfo(args[0]);
     }
 }
