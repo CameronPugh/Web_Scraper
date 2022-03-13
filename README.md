@@ -9,7 +9,7 @@ Clone this repo.
 git clone https://github.com/CameronPugh/Web_Scraper.git
 ```
 
-## bash
+## Run
 
 ```bash
 java WebScraper [url]
